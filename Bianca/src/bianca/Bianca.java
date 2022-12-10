@@ -56,7 +56,7 @@ public class Bianca{
         }
         System.out.println("Rutas: "+m);
         for(int i=0;i<m;i++){
-            System.out.println("De "+rutas[i][0]+" a "+rutas[i][1]+" con numeor de entrenadores "+entrenadores[i]);
+            System.out.println("De "+rutas[i][0]+" a "+rutas[i][1]+" con numero de entrenadores "+entrenadores[i]);
         }
         System.out.println("Camino: "+k);
         for(int i=0;i<k;i++){
