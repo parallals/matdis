@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Bianca{
     public static void main(String args[]){
+        // Lectura de el documento de texto
         String filename = "Bianca.txt";
         Scanner sc = null;
         if(args.length>0){
@@ -48,9 +49,10 @@ public class Bianca{
                 camino[i] = sc.nextLine();
            }
         }
-        
-        for(int i=0 ; i<1 ; i++){
+        // Llama al metodo Dijkstra en "camino.length-1" iteraciones para obtener asi el camino mas corto
+        for(int i=0 ; i<camino.length-1 ; i++){
             AlgoritmoDijkstra.Dijkstra(ciudades, rutas, entrenadores, camino[i], camino[i+1]);
         }
+        // Tada
     }
 }

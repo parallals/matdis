@@ -4,9 +4,11 @@ package bianca;
 public class AlgoritmoDijkstra {
     
     public static void Dijkstra(String[] ciudades, String[][] rutas, int[] entrenadores, String ciudadInicial, String ciudadFinal){
+         // Principales arreglos que ocuparemos
          String[] padres = new String[ciudades.length];
          int[] distancias = new int[ciudades.length];
          boolean[] vistos = new boolean[ciudades.length];
+         // Inicializacion de los arreglos
          for(int i=0 ; i<distancias.length ; i++){
              distancias[i] = Integer.MAX_VALUE - 1;          
              vistos[i] = false;
@@ -35,7 +37,7 @@ public class AlgoritmoDijkstra {
                  vistos[i] = true;
              }
          }
-         
+         // Comprobamos que el grafo no se Trivial
          boolean noTodosVistos;
          int aux = 0;
          for(int i=0 ; i<vistos.length ; i++){
@@ -49,8 +51,9 @@ public class AlgoritmoDijkstra {
          }else{
              noTodosVistos = false;
          }
-         
+         // Empieza la el ciclo Principal
          while(noTodosVistos){
+             // Buscamos el vertice con menos distancia
              int menor = Integer.MAX_VALUE;
              int indiceVertice = 0;
              for(int i=0 ; i<distancias.length ; i++){
@@ -59,7 +62,9 @@ public class AlgoritmoDijkstra {
                      indiceVertice = i;
                  }
              }
+             // Una vez encontrado lo guardamos y lo marcamos como visto
              vistos[indiceVertice] = true;
+             // Buscamos sus vertices adyacentes y les asignamos nuevas distancias ademas de guardar su padre
              for(int i=0 ; i<rutas.length ; i++){
                 if(rutas[i][0].equals(ciudades[indiceVertice])){
                     for(int j=0 ; j<distancias.length ; j++){
@@ -84,6 +89,7 @@ public class AlgoritmoDijkstra {
                     }
                 }
              }
+             // Revisamos si todos sus vertices ya fueron vistos se ser asi, se rompe el while
              aux = 0;
              for(int i=0 ; i<vistos.length ; i++){
                  if(vistos[i] == false){
@@ -96,34 +102,28 @@ public class AlgoritmoDijkstra {
              }else{
                  noTodosVistos = false;
              }
+             // Caso contrario, hacemos otra iteracion
          }
-         
-         for(int i=0 ; i<ciudades.length ; i++){
-             if(ciudades[i].equals(ciudadInicial)){
-                  int indiceVertice = i;
-             }
-             for(int j=0 ; j<ciudades.length ; j++){
-                if(!ciudades[j].equals(ciudades[i])){
-                   System.out.print("\n" + ciudades[i] + " -> ");
-                   System.out.print(ciudades[j] + " \t\t ");
-                   System.out.print(distancias[j] + "\n" );
-                   imprimirPadres(j, padres, ciudades);
-                }
+         // Imprimimos las ciudades a recorrer para llegar de ciudadInicial a ciudadFinal
+         for(int j=0 ; j<ciudades.length ; j++){
+            if(ciudades[j].equals(ciudadFinal)){
+                imprimirPadres(j, padres, ciudades);
             }
         }
     }
-    private static void imprimirPadres(int j, String[] padres, String[] ciudades){
+    // Metodo recursivo que llama sucesivamente a los padres de un vertice hasta llegar a un vertice cuyo padre es null
+    private static void imprimirPadres(int vertice, String[] padres, String[] ciudades){
         int indicePadre = 0;
-        if(padres[j]==null){
+        if(padres[vertice]==null){
             return;
         }
         for(int i=0 ; i<ciudades.length ; i++){
-            if(padres[j].equals(ciudades[i])){
+            if(padres[vertice].equals(ciudades[i])){
                 indicePadre = i;
             }
         }
         imprimirPadres(indicePadre, padres, ciudades);
-        System.out.println(ciudades[j] + " ");
+        System.out.println(ciudades[vertice] + " ");
     }
 
 }
