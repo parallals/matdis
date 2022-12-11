@@ -4,31 +4,31 @@ import java.util.ArrayList;
 
 public class AlgoritmoDijkstra {
     
-    public static void Dijkstra(String[] ciudades, String[][] rutas, int[] entrenadores, String ciudadInicial, String ciudadFinal){
+    public static void Dijkstra(String[] nodos, String[][] aristas, int[] pesos, String nodoInicial, String nodoFinal){
         
-         int[] distancias = new int[ciudades.length];
-         boolean[] vistos = new boolean[ciudades.length];
+         int[] distancias = new int[nodos.length];
+         boolean[] vistos = new boolean[nodos.length];
          ArrayList<String> ciudadesRecorridas = new ArrayList();
          
          for(int i=0 ; i<distancias.length ; i++){
              distancias[i] = Integer.MAX_VALUE-1;          
              vistos[i] = false;
          }
-         for(int i=0 ; i<rutas.length ; i++){
-             if(rutas[i][0].equals(ciudadInicial)){
+         for(int i=0 ; i<aristas.length ; i++){
+             if(aristas[i][0].equals(nodoInicial)){
                  for(int j=0 ; j<distancias.length ; j++){
-                     if(rutas[i][1].equals(ciudades[j])){
-                         distancias[j] = entrenadores[i];
+                     if(aristas[i][1].equals(nodos[j])){
+                         distancias[j] = pesos[i];
                      }
                  }
-             }else if(rutas[i][1].equals(ciudadInicial)){
+             }else if(aristas[i][1].equals(nodoInicial)){
                  for(int j=0 ; j<distancias.length ; j++){
-                     if(rutas[i][0].equals(ciudades[j])){
-                         distancias[j] = entrenadores[i];
+                     if(aristas[i][0].equals(nodos[j])){
+                         distancias[j] = pesos[i];
                      }
                  }
              }
-             if(ciudades[i].equals(ciudadInicial)){
+             if(nodos[i].equals(nodoInicial)){
                  distancias[i] = 0;
                  vistos[i] = true;
              }
@@ -58,24 +58,24 @@ public class AlgoritmoDijkstra {
                  }
              }
              vistos[indiceVertice] = true;
-             ciudadesRecorridas.add(ciudades[indiceVertice]);             
-             for(int i=0 ; i<rutas.length ; i++){
-                if(rutas[i][0].equals(ciudades[indiceVertice])){
+             ciudadesRecorridas.add(nodos[indiceVertice]);             
+             for(int i=0 ; i<aristas.length ; i++){
+                if(aristas[i][0].equals(nodos[indiceVertice])){
                     for(int j=0 ; j<distancias.length ; j++){
-                        if(rutas[i][1].equals(ciudades[j]) && vistos[j]==false){
-                            if(distancias[j] > distancias[indiceVertice]+entrenadores[i]){
-                                distancias[j] = distancias[indiceVertice]+entrenadores[i];
+                        if(aristas[i][1].equals(nodos[j]) && vistos[j]==false){
+                            if(distancias[j] > distancias[indiceVertice]+pesos[i]){
+                                distancias[j] = distancias[indiceVertice]+pesos[i];
                             }
                         }
                     }
                 }
              }
-             for(int i=0 ; i<rutas.length ; i++){
-                if(rutas[i][1].equals(ciudades[indiceVertice])){
+             for(int i=0 ; i<aristas.length ; i++){
+                if(aristas[i][1].equals(nodos[indiceVertice])){
                     for(int j=0 ; j<distancias.length ; j++){
-                        if(rutas[i][0].equals(ciudades[j]) && vistos[j]==false){
-                            if(distancias[j] > distancias[indiceVertice]+entrenadores[i]){
-                                distancias[j] = distancias[indiceVertice]+entrenadores[i];
+                        if(aristas[i][0].equals(nodos[j]) && vistos[j]==false){
+                            if(distancias[j] > distancias[indiceVertice]+pesos[i]){
+                                distancias[j] = distancias[indiceVertice]+pesos[i];
                             }
                         }
                     }
@@ -95,7 +95,7 @@ public class AlgoritmoDijkstra {
              }
          }
          
-         for(int i=0 ; i<ciudades.length ; i++){
+         for(int i=0 ; i<nodos.length ; i++){
             System.out.println(distancias[i]);   
          }
     }
