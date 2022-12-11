@@ -1,11 +1,15 @@
 package bianca;
 
+import java.util.ArrayList;
+
 public class AlgoritmoDijkstra {
     
     public static void Dijkstra(String[] ciudades, String[][] rutas, int[] entrenadores, String ciudadInicial, String ciudadFinal){
         
          int[] distancias = new int[ciudades.length];
          boolean[] vistos = new boolean[ciudades.length];
+         ArrayList<String> ciudadesRecorridas = new ArrayList();
+         
          for(int i=0 ; i<distancias.length ; i++){
              distancias[i] = Integer.MAX_VALUE-1;          
              vistos[i] = false;
@@ -54,6 +58,7 @@ public class AlgoritmoDijkstra {
                  }
              }
              vistos[indiceVertice] = true;
+             ciudadesRecorridas.add(ciudades[indiceVertice]);             
              for(int i=0 ; i<rutas.length ; i++){
                 if(rutas[i][0].equals(ciudades[indiceVertice])){
                     for(int j=0 ; j<distancias.length ; j++){
@@ -91,7 +96,7 @@ public class AlgoritmoDijkstra {
          }
          
          for(int i=0 ; i<ciudades.length ; i++){
-            System.out.println(distancias[i]);
+            System.out.println(distancias[i]);   
          }
     }
 }
