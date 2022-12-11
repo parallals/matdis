@@ -53,6 +53,7 @@ public class Bianca{
         for(int i=0 ; i<camino.length-1 ; i++){
             AlgoritmoDijkstra.Dijkstra(ciudades, rutas, entrenadores, camino[i], camino[i+1]);
         }
+        // Como extra mencionar que agregamos L1 al camino de Bianca.txt, ya que en el enunciado dice que por ultimo debe ir a la Liga Pokemon
         // Tada
     }
 }

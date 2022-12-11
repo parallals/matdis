@@ -1,6 +1,5 @@
 package bianca;
 
-
 public class AlgoritmoDijkstra {
     
     public static void Dijkstra(String[] ciudades, String[][] rutas, int[] entrenadores, String ciudadInicial, String ciudadFinal){
