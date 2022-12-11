@@ -1,11 +1,13 @@
 package profesoraencina;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class ProfesoraEncina {
     public static void main(String args[]){
+/*_____________________________LECTURA DEL .TXT__________________________________*/
         String filename = "ProfesoraEncina.txt";
         Scanner sc = null;
         if(args.length>0){
@@ -21,18 +23,17 @@ public class ProfesoraEncina {
         } catch(FileNotFoundException e){
             System.err.println("Error al leer archivo.");
         }
-        
         int n = 0;
         String[] entrenadores = null;
         String[][] contactos = null;
-        String[] confianza = null;
+        String[] desconfianza = null;
         String[][] aux = null;
         int m = 0;
         while (sc.hasNextLine()){
             n = Integer.parseInt(sc.nextLine());
             aux = new String[n][n];
             entrenadores = new String[n];
-            confianza = new String[n];
+            desconfianza = new String[n];
             for(int i=0 ; i<n ; i++){
                 String datos = sc.nextLine();
                 String[] d = datos.split(" ");
@@ -42,7 +43,7 @@ public class ProfesoraEncina {
                     aux[i][1+j] = d[2+j];
                 }
                 m = m + Integer.parseInt(d[1]);
-                confianza[i] = d[2+Integer.parseInt(d[1])];
+                desconfianza[i] = d[2+Integer.parseInt(d[1])];
             }
             contactos = new String[m][2];
             m = 0;
@@ -54,20 +55,7 @@ public class ProfesoraEncina {
                 }
             }
         }
-        //Imprimir
-        System.out.println("entrenadores: "+n);
-        for(int i=0 ; i<n ; i++){
-        System.out.println(entrenadores[i]);
-        }
-        System.out.println("Contactos: "+m);
-        for(int i=0 ; i<m ; i++){
-            System.out.println(contactos[i][0]+" llama a "+contactos[i][1]);
-        }
-        System.out.println("Confianza: ");
-        for(int i=0 ; i<n ; i++){
-            System.out.println(confianza[i]);
-        }
-        
+/*________________________PASANDO ARREGLOS A CLASE GRAFO_______________________________*/
         Grafo digrafo = new Grafo();
         for(int i=0; i<entrenadores.length ; i++){
             digrafo.vertices.add(new Vertice());
@@ -78,6 +66,7 @@ public class ProfesoraEncina {
                 if(contactos[j][0].equals(entrenadores[i])){
                     for(int k=0 ; k<entrenadores.length ; k++){
                         if(contactos[j][1].equals(entrenadores[k])){
+                            System.out.println(entrenadores[i] + " llama a " + entrenadores[k]);
                             digrafo.vertices.get(i).outVecinos.add(digrafo.vertices.get(k));
                         }
                     }
@@ -87,12 +76,33 @@ public class ProfesoraEncina {
                 if(contactos[j][1].equals(entrenadores[i])){
                     for(int k=0 ; k<entrenadores.length ; k++){
                         if(contactos[j][0].equals(entrenadores[k])){
+                            System.out.println(entrenadores[i] + " es llamada por " + entrenadores[k]);
                             digrafo.vertices.get(i).inVecinos.add(digrafo.vertices.get(k));
                         }
                     }
                 }
             }
         }
+        // Intentando quitar a los con desconfianza == "yes" AAAAAAAAAA
+        int flag;
+        for(int i=0; i<entrenadores.length ; i++){
+            if(desconfianza[i].equals("yes")){
+                for(int j=0; j<digrafo.vertices.get(i).inVecinos.size() ; j++){
+                    flag = -1;
+                    for(int k=0; k<digrafo.vertices.get(i).outVecinos.size() ; k++){
+                        if(digrafo.vertices.get(i).inVecinos.get(j).id == digrafo.vertices.get(i).outVecinos.get(k).id){
+                            
+                        }
+                    }
+                }
+            }
+        }
+/*_______________________________GRAFO TERMINADO__________________________________*/
+        //AlgoritmoSCC.algoritmoKujaru(digrafo);
+        
+        
     }
 }
 // ProfesoraEncina.txt
+
+                    //        if(desconfianza[i].equals("no")){

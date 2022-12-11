@@ -1,7 +1,7 @@
 package profesoraencina;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/*___________________________________VERTICE____________________________________*/
 class Vertice{
     //Elementos básicos del grafo
     public ArrayList<Vertice> inVecinos = new ArrayList<>(); // Vecinos que tienen un arco que le apunta
@@ -12,13 +12,12 @@ class Vertice{
     Boolean visited = false;
     Boolean assigned = false;
 }
-
+/*___________________________________GRAFO_______________________________________*/
 class Grafo{
     //Los Vertices del grafo:
     public ArrayList<Vertice> vertices = new ArrayList<>();
 
-    //Funciones y otros para SCC:
-
+    /*____________Funciones y otros para SCC:________*/
     //Aqui se guardarán las SCC:
     public HashMap<Integer, ArrayList<Vertice>> scc;;
 
@@ -35,7 +34,7 @@ class Grafo{
         for(int i = 0; i < u.outVecinos.size(); i++){   //Por cada out vecino v de u se hace visit(v)
             visit(u.outVecinos.get(i));
         }
-        l.add(0, u);                                    //prepend u a l
+        l.add(0, u);
     }
 
     public void assign(Vertice u, Vertice root){
@@ -56,7 +55,7 @@ class Grafo{
     public void sacarScc(){
         //Paso 1
         scc = new HashMap<>();   //Las key del hashmap son el id del vertice raiz del componente
-        l = new ArrayList<>();                       //Let l be empty
+        l = new ArrayList<>();
 
         //Para cada vertice u del grafico marca u como no visitado
         for(int i = 0; i < vertices.size(); i++){
@@ -77,10 +76,9 @@ class Grafo{
         }
     }
 }
-public class AlgoritmoSCC {
-
-    public static void main(String[] args) {
-        
+/*_______________________________________________________________________________________*/
+public class AlgoritmoSCC{
+    public static void algoritmoKujaru(Grafo grafo){
+        grafo.sacarScc();
     }
-    
 }
