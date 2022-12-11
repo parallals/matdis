@@ -48,49 +48,34 @@ public class AlgoritmoDijkstra {
              int menor = Integer.MAX_VALUE;
              int indiceVertice = 0;
              for(int i=0 ; i<distancias.length ; i++){
-                 if(vistos[i]==false){
-                     menor = distancias[i];
-                     indiceVertice = i;
-                     break;
-                 }
-             }
-             for(int i=0 ; i<distancias.length ; i++){
                  if(distancias[i]<menor && vistos[i]==false){
                      menor = distancias[i];
                      indiceVertice = i;
                  }
              }
              vistos[indiceVertice] = true;
-             
-             int indiceAdyacente = 0;
-             int indicePeso = 0;
              for(int i=0 ; i<rutas.length ; i++){
                 if(rutas[i][0].equals(ciudades[indiceVertice])){
                     for(int j=0 ; j<distancias.length ; j++){
-                        if(rutas[i][1].equals(ciudades[j])){
-                            indiceAdyacente = j;
-                            indicePeso = i;
+                        if(rutas[i][1].equals(ciudades[j]) && vistos[j]==false){
+                            if(distancias[j] > distancias[indiceVertice]+entrenadores[i]){
+                                distancias[j] = distancias[indiceVertice]+entrenadores[i];
+                            }
                         }
                     }
-                }
-                if(distancias[indiceAdyacente] > distancias[indiceVertice]+entrenadores[indicePeso]){
-                    distancias[indiceAdyacente] = distancias[indiceVertice]+entrenadores[indicePeso];
                 }
              }
              for(int i=0 ; i<rutas.length ; i++){
                 if(rutas[i][1].equals(ciudades[indiceVertice])){
                     for(int j=0 ; j<distancias.length ; j++){
-                        if(rutas[i][0].equals(ciudades[j])){
-                            indiceAdyacente = j;
-                            indicePeso = i;
+                        if(rutas[i][0].equals(ciudades[j]) && vistos[j]==false){
+                            if(distancias[j] > distancias[indiceVertice]+entrenadores[i]){
+                                distancias[j] = distancias[indiceVertice]+entrenadores[i];
+                            }
                         }
                     }
                 }
-                if(distancias[indiceAdyacente] > distancias[indiceVertice]+entrenadores[indicePeso]){
-                    distancias[indiceAdyacente] = distancias[indiceVertice]+entrenadores[indicePeso];
-                }
              }
-             
              aux = 0;
              for(int i=0 ; i<vistos.length ; i++){
                  if(vistos[i] == false){
