@@ -61,11 +61,38 @@ public class ProfesoraEncina {
         }
         System.out.println("Contactos: "+m);
         for(int i=0 ; i<m ; i++){
-            System.out.println("De "+contactos[i][0]+" a "+contactos[i][1]);
+            System.out.println(contactos[i][0]+" llama a "+contactos[i][1]);
         }
         System.out.println("Confianza: ");
         for(int i=0 ; i<n ; i++){
             System.out.println(confianza[i]);
         }
+        
+        Grafo digrafo = new Grafo();
+        for(int i=0; i<entrenadores.length ; i++){
+            digrafo.vertices.add(new Vertice());
+        }
+        for(int i=0; i<entrenadores.length ; i++){
+            digrafo.vertices.get(i).id = i;  // Indice del entrenador en nuestro arreglo
+            for(int j=0 ; j<contactos.length ; j++){
+                if(contactos[j][0].equals(entrenadores[i])){
+                    for(int k=0 ; k<entrenadores.length ; k++){
+                        if(contactos[j][1].equals(entrenadores[k])){
+                            digrafo.vertices.get(i).outVecinos.add(digrafo.vertices.get(k));
+                        }
+                    }
+                }
+            }
+            for(int j=0 ; j<contactos.length ; j++){
+                if(contactos[j][1].equals(entrenadores[i])){
+                    for(int k=0 ; k<entrenadores.length ; k++){
+                        if(contactos[j][0].equals(entrenadores[k])){
+                            digrafo.vertices.get(i).inVecinos.add(digrafo.vertices.get(k));
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+// ProfesoraEncina.txt
