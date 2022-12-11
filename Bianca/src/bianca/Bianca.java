@@ -1,5 +1,4 @@
 package bianca;
-import static bianca.AlgoritmoDijkstra.Dijkstra;
 import java.io.File;
 import java.util.Scanner;
 
@@ -49,22 +48,9 @@ public class Bianca{
                 camino[i] = sc.nextLine();
            }
         }
-        //Imprimir
-        System.out.println("Ciudades: "+n);
-        for(int i=0;i<n;i++){
-        System.out.println(ciudades[i]);
-        }
-        System.out.println("Rutas: "+m);
-        for(int i=0;i<m;i++){
-            System.out.println("De "+rutas[i][0]+" a "+rutas[i][1]+" con numero de entrenadores "+entrenadores[i]);
-        }
-        System.out.println("Camino: "+k);
-        for(int i=0;i<k;i++){
-            System.out.println(camino[i]);
-        }
-        System.out.println("desde aca");
+        
         for(int i=0 ; i<1 ; i++){
-            Dijkstra(ciudades, rutas, entrenadores, camino[i], camino[i+1]);
+            AlgoritmoDijkstra.Dijkstra(ciudades, rutas, entrenadores, camino[i], camino[i+1]);
         }
     }
 }
