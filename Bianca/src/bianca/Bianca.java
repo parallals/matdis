@@ -62,7 +62,8 @@ public class Bianca{
         for(int i=0;i<k;i++){
             System.out.println(camino[i]);
         }
-        for(int i=0 ; i<camino.length-1 ; i++){
+        System.out.println("desde aca");
+        for(int i=0 ; i<1 ; i++){
             Dijkstra(ciudades, rutas, entrenadores, camino[i], camino[i+1]);
         }
     }

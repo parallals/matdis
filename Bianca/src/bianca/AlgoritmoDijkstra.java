@@ -7,22 +7,20 @@ public class AlgoritmoDijkstra {
          int[] distancias = new int[ciudades.length];
          boolean[] vistos = new boolean[ciudades.length];
          for(int i=0 ; i<distancias.length ; i++){
-             distancias[i] = -1;           //Usaremos -1 como reemplazo de infinito.
-             vistos[i] = true;
+             distancias[i] = Integer.MAX_VALUE-1;          
+             vistos[i] = false;
          }
          for(int i=0 ; i<rutas.length ; i++){
              if(rutas[i][0].equals(ciudadInicial)){
                  for(int j=0 ; j<distancias.length ; j++){
                      if(rutas[i][1].equals(ciudades[j])){
                          distancias[j] = entrenadores[i];
-                         vistos[i] = false;
                      }
                  }
              }else if(rutas[i][1].equals(ciudadInicial)){
                  for(int j=0 ; j<distancias.length ; j++){
                      if(rutas[i][0].equals(ciudades[j])){
                          distancias[j] = entrenadores[i];
-                         vistos[i] = false;
                      }
                  }
              }
@@ -37,25 +35,27 @@ public class AlgoritmoDijkstra {
          for(int i=0 ; i<vistos.length ; i++){
              if(vistos[i] == false){
                  aux = 1;
+                 break;
              }
          }
          if(aux==1){
              noTodosVistos = true;
-         }else {
+         }else{
              noTodosVistos = false;
          }
          
          while(noTodosVistos){
-             int menor = -1;
+             int menor = Integer.MAX_VALUE;
              int indiceVertice = 0;
              for(int i=0 ; i<distancias.length ; i++){
-                 if(distancias[i]!=-1 && vistos[i]==false){
+                 if(vistos[i]==false){
                      menor = distancias[i];
+                     indiceVertice = i;
                      break;
                  }
              }
              for(int i=0 ; i<distancias.length ; i++){
-                 if(distancias[i]<menor && distancias[i]!=-1 && vistos[i]==false){
+                 if(distancias[i]<menor && vistos[i]==false){
                      menor = distancias[i];
                      indiceVertice = i;
                  }
@@ -95,11 +95,12 @@ public class AlgoritmoDijkstra {
              for(int i=0 ; i<vistos.length ; i++){
                  if(vistos[i] == false){
                      aux = 1;
+                     break;
                  }
              }
              if(aux==1){
                  noTodosVistos = true;
-             }else {
+             }else{
                  noTodosVistos = false;
              }
          }
