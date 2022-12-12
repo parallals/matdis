@@ -1,7 +1,6 @@
 package profesoraencina;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -61,13 +60,13 @@ public class ProfesoraEncina {
             digrafo.vertices.add(new Vertice());
         }
         for(int i=0; i<entrenadores.length ; i++){
-            digrafo.vertices.get(i).id = i;  // Indice del entrenador en nuestro arreglo
+            digrafo.vertices.get(i).nombre = i;  // Indice del entrenador en nuestro arreglo
             for(int j=0 ; j<contactos.length ; j++){
                 if(contactos[j][0].equals(entrenadores[i])){
                     for(int k=0 ; k<entrenadores.length ; k++){
                         if(contactos[j][1].equals(entrenadores[k])){
                             //System.out.println(entrenadores[i] + " llama a " + entrenadores[k]);
-                            digrafo.vertices.get(i).outVecinos.add(digrafo.vertices.get(k));
+                            digrafo.vertices.get(i).VecindadSalida.add(digrafo.vertices.get(k));
                         }
                     }
                 }
@@ -75,7 +74,7 @@ public class ProfesoraEncina {
                     for(int k=0 ; k<entrenadores.length ; k++){
                         if(contactos[j][0].equals(entrenadores[k])){
                             //System.out.println(entrenadores[i] + " es llamada por " + entrenadores[k]);
-                            digrafo.vertices.get(i).inVecinos.add(digrafo.vertices.get(k));
+                            digrafo.vertices.get(i).VecindadEntrada.add(digrafo.vertices.get(k));
                         }
                     }
                 }
@@ -83,23 +82,23 @@ public class ProfesoraEncina {
         }
         for(int i=0; i<entrenadores.length ; i++){
             if(desconfianza[i].equals("yes")){
-                for(int j=0; j<digrafo.vertices.get(i).inVecinos.size() ; j++){
+                for(int j=0; j<digrafo.vertices.get(i).VecindadEntrada.size() ; j++){
                     boolean flag = false;
                     int idEliminado;
-                    for(int k=0 ; k<digrafo.vertices.get(i).outVecinos.size() ; k++){
-                        if(digrafo.vertices.get(i).inVecinos.get(j).id == digrafo.vertices.get(i).outVecinos.get(k).id){
+                    for(int k=0 ; k<digrafo.vertices.get(i).VecindadSalida.size() ; k++){
+                        if(digrafo.vertices.get(i).VecindadEntrada.get(j).nombre  == digrafo.vertices.get(i).VecindadSalida.get(k).nombre ){
                             flag = true;
                         }
                     }
-                    idEliminado = digrafo.vertices.get(i).inVecinos.get(j).id;
+                    idEliminado = digrafo.vertices.get(i).VecindadEntrada.get(j).nombre;
                     if(flag == false){
-                        for(int k=0 ; k<digrafo.vertices.get(idEliminado).outVecinos.size() ; k++){
-                            if(digrafo.vertices.get(idEliminado).outVecinos.get(k).id == digrafo.vertices.get(i).id){
-                                digrafo.vertices.get(idEliminado).outVecinos.remove(k);
+                        for(int k=0 ; k<digrafo.vertices.get(idEliminado).VecindadSalida.size() ; k++){
+                            if(digrafo.vertices.get(idEliminado).VecindadSalida.get(k).nombre  == digrafo.vertices.get(i).nombre ){
+                                digrafo.vertices.get(idEliminado).VecindadSalida.remove(k);
                                 break;
                             }
                         }
-                        digrafo.vertices.get(i).inVecinos.remove(j);
+                        digrafo.vertices.get(i).VecindadEntrada.remove(j);
                         j = j-1;
                     }
                 }
@@ -120,7 +119,7 @@ public class ProfesoraEncina {
         }
 */
 /*_______________________________GRAFO TERMINADO__________________________________*/
-      AlgoritmoSCC.algoritmoKujaru(digrafo);
+      AlgoritmoKujaru.algoritmoKujaru(digrafo);
         
         
     }
