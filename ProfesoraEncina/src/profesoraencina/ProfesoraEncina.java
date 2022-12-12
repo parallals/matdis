@@ -66,43 +66,61 @@ public class ProfesoraEncina {
                 if(contactos[j][0].equals(entrenadores[i])){
                     for(int k=0 ; k<entrenadores.length ; k++){
                         if(contactos[j][1].equals(entrenadores[k])){
-                            System.out.println(entrenadores[i] + " llama a " + entrenadores[k]);
+                            //System.out.println(entrenadores[i] + " llama a " + entrenadores[k]);
                             digrafo.vertices.get(i).outVecinos.add(digrafo.vertices.get(k));
                         }
                     }
                 }
-            }
-            for(int j=0 ; j<contactos.length ; j++){
                 if(contactos[j][1].equals(entrenadores[i])){
                     for(int k=0 ; k<entrenadores.length ; k++){
                         if(contactos[j][0].equals(entrenadores[k])){
-                            System.out.println(entrenadores[i] + " es llamada por " + entrenadores[k]);
+                            //System.out.println(entrenadores[i] + " es llamada por " + entrenadores[k]);
                             digrafo.vertices.get(i).inVecinos.add(digrafo.vertices.get(k));
                         }
                     }
                 }
             }
         }
-        // Intentando quitar a los con desconfianza == "yes" AAAAAAAAAA
-        int flag;
         for(int i=0; i<entrenadores.length ; i++){
             if(desconfianza[i].equals("yes")){
                 for(int j=0; j<digrafo.vertices.get(i).inVecinos.size() ; j++){
-                    flag = -1;
-                    for(int k=0; k<digrafo.vertices.get(i).outVecinos.size() ; k++){
+                    boolean flag = false;
+                    int idEliminado;
+                    for(int k=0 ; k<digrafo.vertices.get(i).outVecinos.size() ; k++){
                         if(digrafo.vertices.get(i).inVecinos.get(j).id == digrafo.vertices.get(i).outVecinos.get(k).id){
-                            
+                            flag = true;
                         }
+                    }
+                    idEliminado = digrafo.vertices.get(i).inVecinos.get(j).id;
+                    if(flag == false){
+                        for(int k=0 ; k<digrafo.vertices.get(idEliminado).outVecinos.size() ; k++){
+                            if(digrafo.vertices.get(idEliminado).outVecinos.get(k).id == digrafo.vertices.get(i).id){
+                                digrafo.vertices.get(idEliminado).outVecinos.remove(k);
+                                break;
+                            }
+                        }
+                        digrafo.vertices.get(i).inVecinos.remove(j);
+                        j = j-1;
                     }
                 }
             }
         }
+/*_______________________________IMPRIMIR GRAFO __________________________________*/
+        for(int i=0 ; i<digrafo.vertices.size() ; i++){
+            System.out.println(entrenadores[digrafo.vertices.get(i).id]);
+            for(int j=0 ; j<digrafo.vertices.get(i).inVecinos.size() ; j++){
+                System.out.print(entrenadores[digrafo.vertices.get(i).inVecinos.get(j).id] + "       ");
+            }
+            System.out.println();
+            for(int j=0 ; j<digrafo.vertices.get(i).outVecinos.size() ; j++){
+                System.out.print(entrenadores[digrafo.vertices.get(i).outVecinos.get(j).id] + "       ");
+            }
+            System.out.println("\n_______________________________________________________");
+        }
 /*_______________________________GRAFO TERMINADO__________________________________*/
-        //AlgoritmoSCC.algoritmoKujaru(digrafo);
+      //AlgoritmoSCC.algoritmoKujaru(digrafo);
         
         
     }
 }
 // ProfesoraEncina.txt
-
-                    //        if(desconfianza[i].equals("no")){
