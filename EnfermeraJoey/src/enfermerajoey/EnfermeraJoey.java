@@ -75,17 +75,17 @@ public class EnfermeraJoey {
                 }
             }
         }
-        /*
+        
         for(int i=0 ; i<ciudades.length ; i++){
             System.out.print(i+" -------      ");
             for(int j=0 ; j<ciudades.length ; j++){
                 System.out.print(matAdyacencia[i][j] + "  ");
             }
             System.out.println("");
-        }
-        */
+        }/*
         Grafo grafo = new Grafo(matAdyacencia);
         System.out.println(grafo.getFlujoMaximo(n, m));
+        */
     }
 }
 //EnfermeraJoey.txt
