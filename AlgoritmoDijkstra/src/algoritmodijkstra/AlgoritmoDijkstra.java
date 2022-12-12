@@ -102,13 +102,13 @@ public class AlgoritmoDijkstra {
              }
              // Caso contrario, hacemos otra iteracion
          }
-         // Imprimimos las distancias
+         // Imprimimos las distancias de vertice inicial hasta el resto de vertices, con su camino mas corto
         for(int i=0 ; i<vertices.length ; i++){
              if(vertices[i].equals(verticeInicial)){
              }
              for(int j=0 ; j<vertices.length ; j++){
                 if(!vertices[j].equals(vertices[i])){
-                   System.out.print("\n" + vertices[i] + " -> " + vertices[j] + " \t "+distancias[j] + "\n" );
+                   System.out.print("\n" + vertices[i] + " hasta " + vertices[j] + " \tcon distancia: "+distancias[j] + "\n" );
                    imprimirPadres(j, padres, vertices);
                 }
             }

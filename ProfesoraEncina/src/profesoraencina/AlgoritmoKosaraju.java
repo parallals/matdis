@@ -19,7 +19,7 @@ class Grafo{
 
     /*____________Funciones y otros para SCC:________*/
     //Aqui se guardarán las SCC:
-    public HashMap<Integer, ArrayList<Vertice>> scc;;
+    public HashMap<Integer, ArrayList<Vertice>> scc;
 
     // Arreglo auxiliar para el algoritmo:
     private ArrayList<Vertice> l;      
