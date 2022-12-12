@@ -56,8 +56,8 @@ class Grafo{
 }
 
 /*_______________________________________________________________________________________*/
-public class AlgoritmoKujaru{
-    public static void algoritmoKujaru(Grafo grafo){
+public class AlgoritmoKosaraju{
+    public static void algoritmoKosaraju(Grafo grafo){
         grafo.StronglyConnectedComponents();
     }
 }

@@ -119,7 +119,7 @@ public class ProfesoraEncina {
         }
 */
 /*_______________________________GRAFO TERMINADO__________________________________*/
-      AlgoritmoKujaru.algoritmoKujaru(digrafo);
+      AlgoritmoKosaraju.algoritmoKosaraju(digrafo);
         
         
     }
