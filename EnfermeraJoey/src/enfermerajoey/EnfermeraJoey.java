@@ -61,6 +61,7 @@ public class EnfermeraJoey {
                     for(int k=0 ; k<ciudades.length ; k++){
                         if(rutas[j][1].equals(ciudades[k])){
                             matAdyacencia[i][k] = 1;
+                            matAdyacencia[k][i] = 1;
                         }
                     }
                 } 
@@ -68,6 +69,7 @@ public class EnfermeraJoey {
                     for(int k=0 ; k<ciudades.length ; k++){
                         if(rutas[j][0].equals(ciudades[k])){
                             matAdyacencia[i][k] = 1;
+                            matAdyacencia[k][i] = 1;
                         }
                     }
                 }
