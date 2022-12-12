@@ -38,7 +38,7 @@ public class EnfermeraJoey {
                 rutas[i][0] = r[0];
                 rutas[i][1] = r[1];
            }
-        }
+        }/*
         //Imprimir
         System.out.println("Ciudades: "+n);
         for(int i=0;i<n;i++){
@@ -48,5 +48,42 @@ public class EnfermeraJoey {
         for(int i=0;i<m;i++){
             System.out.println("De "+rutas[i][0]+" a "+rutas[i][1]);
         }
+        */
+        int[][] matAdyacencia = new int[ciudades.length][ciudades.length];
+        for(int i=0 ; i<ciudades.length ; i++){
+            for(int j=0 ; j<ciudades.length ; j++){
+                matAdyacencia[i][j] = 0;
+            }
+        }
+        for(int i=0 ; i<ciudades.length ; i++){
+            for(int j=0 ; j<rutas.length ; j++){
+                if(rutas[j][0].equals(ciudades[i])){
+                    for(int k=0 ; k<ciudades.length ; k++){
+                        if(rutas[j][1].equals(ciudades[k])){
+                            matAdyacencia[i][k] = 1;
+                        }
+                    }
+                } 
+                if(rutas[j][1].equals(ciudades[i])){
+                    for(int k=0 ; k<ciudades.length ; k++){
+                        if(rutas[j][0].equals(ciudades[k])){
+                            matAdyacencia[i][k] = 1;
+                        }
+                    }
+                }
+            }
+        }
+        /*
+        for(int i=0 ; i<ciudades.length ; i++){
+            System.out.print(i+" -------      ");
+            for(int j=0 ; j<ciudades.length ; j++){
+                System.out.print(matAdyacencia[i][j] + "  ");
+            }
+            System.out.println("");
+        }
+        */
+        Grafo grafo = new Grafo(matAdyacencia);
+        System.out.println(grafo.getFlujoMaximo(n, m));
     }
 }
+//EnfermeraJoey.txt

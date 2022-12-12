@@ -106,6 +106,7 @@ public class ProfesoraEncina {
             }
         }
 /*_______________________________IMPRIMIR GRAFO __________________________________*/
+/*
         for(int i=0 ; i<digrafo.vertices.size() ; i++){
             System.out.println(entrenadores[digrafo.vertices.get(i).id]);
             for(int j=0 ; j<digrafo.vertices.get(i).inVecinos.size() ; j++){
@@ -117,8 +118,9 @@ public class ProfesoraEncina {
             }
             System.out.println("\n_______________________________________________________");
         }
+*/
 /*_______________________________GRAFO TERMINADO__________________________________*/
-      //AlgoritmoSCC.algoritmoKujaru(digrafo);
+      AlgoritmoSCC.algoritmoKujaru(digrafo);
         
         
     }

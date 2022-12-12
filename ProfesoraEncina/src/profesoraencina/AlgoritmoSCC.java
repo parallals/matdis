@@ -8,20 +8,20 @@ class Vertice{
     public ArrayList<Vertice> outVecinos = new ArrayList<>(); // Vecinos a los que apunta con un arco
     int id;  //para identificar
 
-    //Variables auxiliares para hacer el SCC
+    // Variables auxiliares para hacer el SCC
     Boolean visited = false;
     Boolean assigned = false;
 }
 /*___________________________________GRAFO_______________________________________*/
 class Grafo{
-    //Los Vertices del grafo:
+    // Los Vertices del grafo:
     public ArrayList<Vertice> vertices = new ArrayList<>();
 
     /*____________Funciones y otros para SCC:________*/
     //Aqui se guardarán las SCC:
     public HashMap<Integer, ArrayList<Vertice>> scc;;
 
-    //Arreglo auxiliar para el algoritmo:
+    // Arreglo auxiliar para el algoritmo:
     private ArrayList<Vertice> l;      
 
     public void visit(Vertice u){
@@ -38,44 +38,45 @@ class Grafo{
     }
 
     public void assign(Vertice u, Vertice root){
-        //Si u ya tiene root no se hace nada
+        // Si u ya tiene root no se hace nada
         if(u.assigned){         
             return;
         }
-        //Si no existe el componente con la raiz root se crea uno y se pone a root ahí
+        // Si no existe el componente con la raiz root se crea uno y se pone a root ahí
         if(!scc.containsKey(root.id)){
             scc.put(root.id, new ArrayList<>());
         }
-        scc.get(root.id).add(u);                        //Se añade u al componente con raiz root
+        scc.get(root.id).add(u);                        // Se añade u al componente con raiz root
         for(int i = 0; i < u.inVecinos.size(); i++){
-            assign(u.inVecinos.get(i), root);           //Por cada in vecino v de u se hace assign(v, root)
+            assign(u.inVecinos.get(i), root);           // Por cada in vecino v de u se hace assign(v, root)
         }
     }   
     
     public void sacarScc(){
-        //Paso 1
-        scc = new HashMap<>();   //Las key del hashmap son el id del vertice raiz del componente
+        // Paso 1
+        scc = new HashMap<>();   // Las key del hashmap son el id del vertice raiz del componente
         l = new ArrayList<>();
 
-        //Para cada vertice u del grafico marca u como no visitado
+        // Para cada vertice u del grafico marca u como no visitado
         for(int i = 0; i < vertices.size(); i++){
             vertices.get(i).visited = false;
             vertices.get(i).assigned = false;
         }
 
-        //Paso 2
+        // Paso 2
         //Para cada vertice u del grafico se hace visit(u)
         for(int i = 0; i < vertices.size(); i++){
             visit(vertices.get(i));
         }
 
-        //Paso 3
-        //para cada elemento u de L en orden se hace assign(u, u)
+        // Paso 3
+        // para cada elemento u de L en orden se hace assign(u, u)
         for(int i = 0; i < l.size(); i++){
             assign(l.get(i), l.get(i));
         }
     }
 }
+
 /*_______________________________________________________________________________________*/
 public class AlgoritmoSCC{
     public static void algoritmoKujaru(Grafo grafo){
